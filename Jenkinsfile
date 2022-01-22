@@ -6,7 +6,7 @@ pipeline {
     FE_SVC_NAME = "${APP_NAME}- checkout"
     CLUSTER = "cluster1"
     CLUSTER_ZONE = "us-central1-c"
-    IMAGE_TAG = "gcr.io/${PROJECT}/${APP_NAME}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
+    IMAGE_TAG = "gcr.io/${PROJECT}/${APP_NAME}:${env.BUILD_NUMBER}"
     JENKINS_CRED = "${PROJECT}"
   }
 
@@ -47,9 +47,7 @@ spec:
       steps {
         container('golang') {
           sh """
-            ln -s `pwd` /go/src/sample-app
-            cd /go/src/sample-app
-            go test
+            ln -s `pwd`
           """
         }
       }
@@ -62,13 +60,14 @@ spec:
       }
     }
     stage('Deploy Dev') {
-      // Developer Branches
-      when {
-        not { branch 'master' }
-        not { branch 'canary' }
-      }
       steps {
         container('kubectl') {
+          
+          sh "gcloud auth list"
+
+          sh "gcloud container clusters get-credentials cluster-1 --zone us-central1-c --project useful-cathode-334010"
+          sh("sed -i.bak 's#checkoutservicenag#${IMAGE_TAG}#' *.yaml")
+          sh "kubectl apply -f checkoutservice.yaml"
         }
       }
     }
