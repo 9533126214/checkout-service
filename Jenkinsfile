@@ -4,15 +4,15 @@ pipeline {
     PROJECT = "useful-cathode-334010"
     APP_NAME = "hello"
     FE_SVC_NAME = "${APP_NAME}-frontend"
-    CLUSTER = "jenkins-cd"
-    CLUSTER_ZONE = "us-east1-d"
+    CLUSTER = "cluster1"
+    CLUSTER_ZONE = "us-central1-c"
     IMAGE_TAG = "gcr.io/${PROJECT}/${APP_NAME}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
     JENKINS_CRED = "${PROJECT}"
   }
 
   agent {
     kubernetes {
-      label 'sample-app'
+     inheritFrom 'sample-app'
       defaultContainer 'jnlp'
       yaml """
 apiVersion: v1
@@ -22,7 +22,7 @@ labels:
   component: ci
 spec:
   # Use service account that can deploy to all namespaces
-  serviceAccountName: cd-jenkins
+  # serviceAccountName: cd-jenkins
   containers:
   - name: golang
     image: golang:1.10
