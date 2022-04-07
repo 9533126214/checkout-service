@@ -65,7 +65,7 @@ spec:
           
           sh "gcloud auth list"
 
-          sh "gcloud container clusters get-credentials cluster-1 --zone us-central1-c --project useful-cathode-334010"
+          sh "gcloud container clusters get-credentials way2die --zone us-east4-b --project indigo-history-337312"
           sh("sed -i.bak 's#checkoutservicenag#${IMAGE_TAG}#' *.yaml")
           sh "kubectl apply -f checkoutservice.yaml"
         }
