@@ -28,7 +28,7 @@ spec:
       serviceAccountName: default
       containers:
         - name: server
-          image: checkoutservicenag
+          image: gcr.io/indigo-history-337312/hello:2
           ports:
           - containerPort: 5050
           readinessProbe:
