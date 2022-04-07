@@ -1,11 +1,11 @@
 pipeline {
 
   environment {
-    PROJECT = "useful-cathode-334010"
+    PROJECT = "indigo-history-337312"
     APP_NAME = "hello"
     FE_SVC_NAME = "${APP_NAME}- checkout"
-    CLUSTER = "cluster1"
-    CLUSTER_ZONE = "us-central1-c"
+    CLUSTER = "way2die"
+    CLUSTER_ZONE = "us-east4-b"
     IMAGE_TAG = "gcr.io/${PROJECT}/${APP_NAME}:${env.BUILD_NUMBER}"
     JENKINS_CRED = "${PROJECT}"
   }
