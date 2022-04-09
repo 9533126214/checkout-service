@@ -28,7 +28,7 @@ spec:
       serviceAccountName: default
       containers:
         - name: server
-          image: gcr.io/indigo-history-337312/hello:2
+          image: gcr.io/srinag/hello:latest
           ports:
           - containerPort: 5050
           readinessProbe:
@@ -73,7 +73,7 @@ kind: Service
 metadata:
   name: checkoutservice
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   selector:
     app: checkoutservice
   ports:
