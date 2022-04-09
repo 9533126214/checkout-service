@@ -28,7 +28,7 @@ spec:
       serviceAccountName: default
       containers:
         - name: server
-          image: gcr.io/srinag/hello:latest
+          image: gcr.io/srinag/checkout:latest
           ports:
           - containerPort: 5050
           readinessProbe:
